@@ -23,6 +23,17 @@ const Products = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
+  // ✅ ONLY ADDITION: login check helper
+  const token = localStorage.getItem("token");
+  const requireLogin = () => {
+    if (!token) {
+      toast.error("Please login to continue");
+      navigate("/login");
+      return false;
+    }
+    return true;
+  };
+
   useEffect(() => {
     let mounted = true;
     const fetchData = async () => {
@@ -68,7 +79,6 @@ const Products = () => {
 
   const ShowProducts = () => (
     <>
-      {/* Filter Buttons */}
       <div className="col-12">
         <div style={{ display: "flex", flexWrap: "wrap", gap: "8px", justifyContent: "center", padding: "24px 0 32px" }}>
           {[
@@ -124,7 +134,6 @@ const Products = () => {
               onMouseEnter={(e) => { e.currentTarget.style.boxShadow = "0 8px 32px rgba(124,58,237,0.13)"; e.currentTarget.style.transform = "translateY(-3px)"; }}
               onMouseLeave={(e) => { e.currentTarget.style.boxShadow = "none"; e.currentTarget.style.transform = "translateY(0)"; }}
             >
-              {/* Discount Badge */}
               {discount && (
                 <div style={{
                   position: "absolute", top: "12px", right: "12px", zIndex: 2,
@@ -137,7 +146,6 @@ const Products = () => {
                 </div>
               )}
 
-              {/* Handmade badge */}
               <div style={{
                 position: "absolute", top: "12px", left: "12px", zIndex: 2,
                 background: "#fff8f0", color: "#c2610c",
@@ -147,12 +155,10 @@ const Products = () => {
                 ✦ Handmade
               </div>
 
-              {/* Image */}
               <div style={{ background: "#fafafa", display: "flex", alignItems: "center", justifyContent: "center", padding: "28px 24px", height: "220px" }}>
                 <img src={image} alt={product.title} style={{ maxHeight: "170px", maxWidth: "100%", objectFit: "contain" }} />
               </div>
 
-              {/* Body */}
               <div style={{ padding: "16px 16px 8px", flex: 1 }}>
                 <span style={{ fontSize: "10px", fontWeight: 600, textTransform: "uppercase", letterSpacing: "0.8px", color: ACCENT }}>
                   {product.subcategory || product.category}
@@ -171,13 +177,15 @@ const Products = () => {
                 </p>
               </div>
 
-              {/* Action Buttons */}
               <div style={{ padding: "8px 16px 16px", display: "flex", gap: "8px" }} onClick={(e) => e.stopPropagation()}>
                 <button
                   style={{ flex: 1, padding: "9px 0", background: ACCENT, color: "#fff", border: "none", borderRadius: "10px", fontSize: "13px", fontWeight: 600, cursor: "pointer", fontFamily: "'DM Sans', sans-serif", boxShadow: `0 2px 8px ${ACCENT}40` }}
                   onMouseEnter={(e) => (e.currentTarget.style.opacity = "0.88")}
                   onMouseLeave={(e) => (e.currentTarget.style.opacity = "1")}
-                  onClick={() => navigate(`/product/${product._id}`)}
+                  onClick={() => {
+                    if (!requireLogin()) return; // ✅ login check added
+                    navigate(`/product/${product._id}`);
+                  }}
                 >
                   Buy Now
                 </button>
@@ -187,6 +195,7 @@ const Products = () => {
                   onMouseLeave={(e) => { e.currentTarget.style.background = "#fff"; }}
                   disabled={!inStock}
                   onClick={() => {
+                    if (!requireLogin()) return; // ✅ login check added
                     if (!inStock) { toast.error("Out of stock"); return; }
                     toast.success("Added to cart!");
                     dispatch(addCart({ id: product._id, title: product.title, price: salePrice, image, category: product.category, requiresSize: false }));

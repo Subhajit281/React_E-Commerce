@@ -2,15 +2,27 @@ import React from "react";
 import { Footer, Navbar } from "../components";
 import { useSelector, useDispatch } from "react-redux";
 import { addCart, delCart } from "../redux/action";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
 
 const Cart = () => {
-  // ✅ Fixed: handleCart IS the array directly
-  const state = useSelector((state) => state.handleCart || []);
+  const state    = useSelector((state) => state.handleCart || []);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
-  const addItem = (product) => dispatch(addCart(product));
+  const addItem    = (product) => dispatch(addCart(product));
   const removeItem = (product) => dispatch(delCart(product));
+
+  // ✅ ONLY ADDITION: login check helper
+  const token = localStorage.getItem("token");
+  const requireLogin = () => {
+    if (!token) {
+      toast.error("Please login to continue");
+      navigate("/login");
+      return false;
+    }
+    return true;
+  };
 
   const EmptyCart = () => (
     <div className="container">
@@ -26,10 +38,10 @@ const Cart = () => {
   );
 
   const ShowCart = () => {
-    let subtotal = 0;
-    let shipping = 30.0;
+    let subtotal   = 0;
+    let shipping   = 30.0;
     let totalItems = 0;
-    state.forEach((item) => { subtotal += item.price * item.qty; });
+    state.forEach((item) => { subtotal   += item.price * item.qty; });
     state.forEach((item) => { totalItems += item.qty; });
 
     return (
@@ -53,24 +65,16 @@ const Cart = () => {
                         <div className="col-lg-5 col-md-6">
                           <p className="mb-1"><strong>{item.title}</strong></p>
                           {item.selectedSize && (
-                            <span style={{
-                              display: "inline-block", background: "#111", color: "#fff",
-                              borderRadius: "4px", padding: "2px 10px", fontSize: "12px",
-                              fontWeight: 600, letterSpacing: "0.5px",
-                            }}>
+                            <span style={{ display: "inline-block", background: "#111", color: "#fff", borderRadius: "4px", padding: "2px 10px", fontSize: "12px", fontWeight: 600, letterSpacing: "0.5px" }}>
                               Size: {item.selectedSize}
                             </span>
                           )}
                         </div>
                         <div className="col-lg-4 col-md-6">
                           <div className="d-flex mb-4 align-items-center" style={{ maxWidth: "300px" }}>
-                            <button className="btn px-3" onClick={() => removeItem(item)}>
-                              <i className="fas fa-minus"></i>
-                            </button>
+                            <button className="btn px-3" onClick={() => removeItem(item)}><i className="fas fa-minus"></i></button>
                             <p className="mx-5 mb-0">{item.qty}</p>
-                            <button className="btn px-3" onClick={() => addItem(item)}>
-                              <i className="fas fa-plus"></i>
-                            </button>
+                            <button className="btn px-3" onClick={() => addItem(item)}><i className="fas fa-plus"></i></button>
                           </div>
                           <p className="text-start text-md-center">
                             <strong><span className="text-muted">{item.qty}</span> x ₹{item.price}</strong>
@@ -103,9 +107,13 @@ const Cart = () => {
                       <strong>₹{Math.round(subtotal + shipping)}</strong>
                     </li>
                   </ul>
-                  <Link to="/checkout" className="btn btn-dark btn-lg btn-block w-100">
+                  {/* ✅ ONLY CHANGE: login check on Go to Checkout */}
+                  <button
+                    className="btn btn-dark btn-lg btn-block w-100"
+                    onClick={() => { if (!requireLogin()) return; navigate("/checkout"); }}
+                  >
                     Go to checkout
-                  </Link>
+                  </button>
                 </div>
               </div>
             </div>
