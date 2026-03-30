@@ -281,7 +281,7 @@ const Footer = () => {
                   Bringing the beauty of nature to your doorstep. Every arrangement is handcrafted with love and delivered fresh.
                 </p>
                 <div className="fh-social-row">
-                  <a href="https://www.instagram.com/_epic_18" target="_blank" rel="noreferrer" className="fh-social-btn" title="Instagram">
+                  <a href="https://www.instagram.com/floral_heaven02?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noreferrer" className="fh-social-btn" title="Instagram">
                     <i className="fa fa-instagram " />
                   </a>
                   {/* <a href="https://github.com/Subhajit281" target="_blank" rel="noreferrer" className="fh-social-btn" title="GitHub">
