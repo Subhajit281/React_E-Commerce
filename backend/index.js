@@ -20,6 +20,7 @@ app.use(express.urlencoded({ extended: false }));
 const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:5173",
+  "https://florals-heaven.onrender.com"
 ];
 
 app.use(
