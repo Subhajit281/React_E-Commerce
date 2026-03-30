@@ -1,6 +1,18 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Home = () => {
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
+
+  useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
+    window.addEventListener("resize", handleResize);
+
+    return () => window.removeEventListener("resize", handleResize);
+  }, []);
+
   return (
     <>
       <div className="hero border-1 pb-3">
@@ -9,7 +21,10 @@ const Home = () => {
             className="card-img img-fluid hero-img"
             src="https://res.cloudinary.com/dyxbvlzcl/image/upload/v1774849769/newimg_gydvif.jpg"
             alt="Card"
-            style={{ height: "65vh", objectFit: "cover" }}
+            style={{
+              height: isMobile ? "32vh" : "65vh",
+              objectFit: "cover",
+            }}
           />
           <div className="card-img-overlay d-flex align-items-center">
             <div className="container ">
@@ -26,14 +41,14 @@ const Home = () => {
                 New Season Arrivals
               </h5>
               <p
-                className="card-text fs-5 d-none d-sm-block"
+                className="card-text fs-5 "
                 style={{
                   color: "#f5f5f5",
                   fontWeight: "600",
-                  letterSpacing: "1px",
+                  letterSpacing: "0.5px",
                   textShadow: "2px 3px 10px rgba(0,0,0,0.9)",
                   maxWidth: "900px",
-                  lineHeight: "1.6",
+                  lineHeight: "1.3",
                 }}
               >
                 Step into the new season with our handcrafted jewellery
