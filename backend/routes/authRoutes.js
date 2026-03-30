@@ -2,7 +2,7 @@ import express from "express";
 import {handleUserSignup,handleLogin} from "../controllers/authControllers.js";
 // const {protect,restrictTo} = require("../middlewares/auth");
 import { protect } from "../middlewares/authMiddleware.js";
-import { getMyProfile } from "../controllers/authControllers.js";
+import { getMyProfile } from "../controllers/authcontrollers.js";
 import { sendOtp, verifyOtp } from "../controllers/authControllers.js";
 const router = express.Router();
 
