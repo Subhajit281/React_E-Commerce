@@ -17,7 +17,7 @@ const getInitialCart = () => {
 const syncAddToBackend = (item) => {
   const token = localStorage.getItem("token");
   if (!token) return; // guest — skip backend
-  fetch(`${BACKEND_URL}/api/cart/add`, {
+  fetch(`${process.env.REACT_APP_API_URL}/api/cart/add`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify(item),
@@ -27,7 +27,7 @@ const syncAddToBackend = (item) => {
 const syncRemoveFromBackend = (item) => {
   const token = localStorage.getItem("token");
   if (!token) return;
-  fetch(`${BACKEND_URL}/api/cart/remove`, {
+  fetch(`${process.env.REACT_APP_API_URL}/api/cart/remove`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
     body: JSON.stringify({ productId: String(item.id || item.productId), selectedSize: item.selectedSize || "" }),
@@ -37,7 +37,7 @@ const syncRemoveFromBackend = (item) => {
 const syncClearFromBackend = () => {
   const token = localStorage.getItem("token");
   if (!token) return;
-  fetch(`${BACKEND_URL}/api/cart/clear`, {
+  fetch(`${process.env.REACT_APP_API_URL}/api/cart/clear`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
   }).catch(() => {});

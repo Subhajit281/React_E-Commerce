@@ -30,7 +30,7 @@ const Product = () => {
       setSizeError(false);
 
       try {
-        const res  = await fetch(`${API_BASE}/api/products/${id}`);
+        const res  = await fetch(`${process.env.REACT_APP_API_URL}/api/products/${id}`);
         const data = await res.json();
         if (!mounted) return;
 
@@ -40,7 +40,7 @@ const Product = () => {
 
         // Fetch similar products in same category
         if (prod?.category) {
-          const res2  = await fetch(`${API_BASE}/api/products/category/${prod.category}`);
+          const res2  = await fetch(`${process.env.REACT_APP_API_URL}/api/products/category/${prod.category}`);
           const data2 = await res2.json();
           if (mounted) {
             setSimilarProducts((data2.products || []).filter((p) => p._id !== prod._id));

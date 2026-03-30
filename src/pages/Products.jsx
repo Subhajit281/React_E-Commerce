@@ -29,8 +29,8 @@ const Products = () => {
       setLoading(true);
       try {
         const [prodRes, catRes] = await Promise.all([
-          fetch(`${API_BASE}/api/products`),
-          fetch(`${API_BASE}/api/products/categories`),
+          fetch(`${process.env.REACT_APP_API_URL}/api/products`),
+          fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`),
         ]);
         const prodJson = await prodRes.json();
         const catJson  = await catRes.json();

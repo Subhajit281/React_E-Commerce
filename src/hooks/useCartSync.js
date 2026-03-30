@@ -16,7 +16,7 @@ const useCartSync = () => {
     try {
       const localCart = JSON.parse(localStorage.getItem("cart") || "[]");
 
-      const res = await fetch(`${BACKEND_URL}/api/cart/sync`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/cart/sync`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

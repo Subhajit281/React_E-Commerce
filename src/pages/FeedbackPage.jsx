@@ -61,7 +61,7 @@ const FeedbackPage = () => {
     setLoading(true);
 
     try {
-      const res = await fetch(`${API_BASE}/api/feedback`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/feedback`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({

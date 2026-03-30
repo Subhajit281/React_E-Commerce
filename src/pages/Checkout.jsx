@@ -93,7 +93,7 @@ const Checkout = () => {
     if (!validateForm()) return;
     setLoading(true);
     try {
-      const res = await fetch(`${BACKEND_URL}/api/payment/cod-order`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/payment/cod-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...getAuthHeader() },
         body: JSON.stringify({
@@ -118,7 +118,7 @@ const Checkout = () => {
     if (!validateForm()) return;
     setLoading(true);
     try {
-      const orderRes  = await fetch(`${BACKEND_URL}/api/payment/create-order`, {
+      const orderRes  = await fetch(`${process.env.REACT_APP_API_URL}/api/payment/create-order`, {
         method: "POST",
         headers: { "Content-Type": "application/json", ...getAuthHeader() },
         body: JSON.stringify({ amount: Math.round(total) }),
@@ -140,7 +140,7 @@ const Checkout = () => {
         },
         theme: { color: "#c2185b" },
         handler: async (response) => {
-          const verifyRes  = await fetch(`${BACKEND_URL}/api/payment/verify`, {
+          const verifyRes  = await fetch(`${process.env.REACT_APP_API_URL}/api/payment/verify`, {
             method: "POST",
             headers: { "Content-Type": "application/json", ...getAuthHeader() },
             body: JSON.stringify({

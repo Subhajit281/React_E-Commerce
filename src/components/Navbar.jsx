@@ -110,7 +110,7 @@ const Navbar = () => {
 
   // ✅ CHANGED: fetch categories from your backend
   useEffect(() => {
-    fetch(`${API_BASE}/api/products/categories`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/products/categories`)
       .then((r) => r.json())
       .then((json) => {
         const cats = (json.categories || []).map(c => ({
@@ -124,7 +124,7 @@ const Navbar = () => {
 
   // ✅ CHANGED: fetch all products from your backend instead of fakestoreapi
   useEffect(() => {
-    fetch(`${API_BASE}/api/products`)
+    fetch(`${process.env.REACT_APP_API_URL}/api/products`)
       .then((r) => r.json())
       .then((json) => setAllProducts(json.products || []))
       .catch(() => {});

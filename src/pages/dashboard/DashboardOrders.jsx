@@ -20,7 +20,7 @@ const DashboardOrders = () => {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch(`${BACKEND_URL}/api/payment/my-orders`, {
+        const res = await fetch(`${process.env.REACT_APP_API_URL}/api/payment/my-orders`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         const data = await res.json();

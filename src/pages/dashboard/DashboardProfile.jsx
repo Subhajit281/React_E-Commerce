@@ -30,7 +30,7 @@ const DashboardProfile = () => {
     if (!name.trim() || name.trim().length < 2) return showToast("Name must be at least 2 characters", "error");
     setNameLoading(true);
     try {
-      const res = await fetch(`${BACKEND_URL}/api/users/update-profile`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/users/update-profile`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ name: name.trim() }),
@@ -61,7 +61,7 @@ const DashboardProfile = () => {
     formData.append("profilePic", file);
 
     try {
-      const res = await fetch(`${BACKEND_URL}/api/users/profile-pic`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/users/profile-pic`, {
         method: "PATCH",
         headers: { Authorization: `Bearer ${token}` },
         body: formData,
@@ -91,7 +91,7 @@ const DashboardProfile = () => {
 
     setPwLoading(true);
     try {
-      const res = await fetch(`${BACKEND_URL}/api/users/change-password`, {
+      const res = await fetch(`${process.env.REACT_APP_API_URL}/api/users/change-password`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json", Authorization: `Bearer ${token}` },
         body: JSON.stringify({ currentPassword: pwData.currentPassword, newPassword: pwData.newPassword }),
