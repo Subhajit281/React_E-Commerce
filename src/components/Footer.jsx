@@ -287,7 +287,7 @@ const Footer = () => {
                   {/* <a href="https://github.com/Subhajit281" target="_blank" rel="noreferrer" className="fh-social-btn" title="GitHub">
                     <i className="fa fa-github" />
                   </a> */}
-                  <a href={`https://wa.me/916001155729`} target="_blank" rel="noreferrer" className="fh-social-btn" title="WhatsApp">
+                  <a href={`https://wa.me/918822533374`} target="_blank" rel="noreferrer" className="fh-social-btn" title="WhatsApp">
                     <i className="fa fa-whatsapp" />
                   </a>
                 </div>
@@ -340,7 +340,7 @@ const Footer = () => {
                   <a href="https://www.instagram.com/floral_heaven02/" target="_blank" rel="noreferrer" className="fh-footer-link">
                     @floral_heaven02 on Instagram
                   </a>
-                  <a href={`https://wa.me/916001155729`} target="_blank" rel="noreferrer" className="fh-footer-link">
+                  <a href={`https://wa.me/918822533374`} target="_blank" rel="noreferrer" className="fh-footer-link">
                     WhatsApp Us
                   </a>
                 </div>
@@ -357,8 +357,8 @@ const Footer = () => {
               © {new Date().getFullYear()} Floral Heaven. All Copyrights Reserved
             </div>
             <div className="fh-footer-legal">
-              <a href="#">Privacy Policy</a>
-              <a href="#">Terms of Use</a>
+              <a href="/about">Privacy Policy</a>
+              <a href="/about">Terms of Use</a>
               <a href="/about">About</a>
               <a href="/contact">Contact</a>
             </div>

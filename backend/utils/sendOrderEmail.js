@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const SUPPLIER_EMAIL = "subhajitsarkar281@gmail.com";
+const SUPPLIER_EMAIL = process.env.ADMIN_EMAIL;
 
 // ─── Build beautiful HTML invoice ────────────────────────────────────────────
 const buildInvoiceHTML = ({ orderId, date, customer, address, items, subtotal, shipping, total, paymentMethod }) => {
